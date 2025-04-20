@@ -108,7 +108,7 @@
 
     <button id="shareButton" class="whatsapp-btn" onclick="shareWhatsApp()" style="display: none;">📲 Share on WhatsApp</button>
     <button class="whatsapp-btn" onclick="window.open('https://whatsapp.com/channel/0029Vb59bYqEawe01cZPgz3V', '_blank')">📢 Join WhatsApp Channel</button>
-    <button class="Whatsapp-btn" onclick="window.open('https://wa.me/qr/WIP3MTII3IS7M1', '_blank')">✈️ Join Telegram Channel</button>
+    <button class="Whatsapp-btn" onclick="window.open('https://wa.me/qr/WIP3MTII3IS7M1', '_blank')">✈️ Contact For Vip Data</button>
   </div>
 
   <script>
@@ -118,7 +118,7 @@
       const shareButton = document.getElementById("shareButton");
 
       if (!number) {
-        alert("Please enter a phone number.");
+        alert("Please enter number Exp 300.");
         return;
       }
 
@@ -135,7 +135,7 @@
 📞 Mobile: ${user.Mobile || "Not found"}
 👤 Name: ${user.Name || "Not found"}
 🆔 CNIC: ${user.CNIC || "Not found"}
-📍 Address: ${user.Address || "Not found"}
+🏠 Address: ${user.Address || "Not found"}
 📶 Operator: ${user.Operator || "Not found"}
           `;
           responseBox.innerText = content;
