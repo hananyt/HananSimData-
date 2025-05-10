@@ -136,20 +136,7 @@
 👤 Name: ${user.Name || "Not found"}
 🆔 CNIC: ${user.CNIC || "Not found"}
 🏠 Address: ${user.Address || "Not found"}
-📶 Operator: ${user.Operator || "Not found"}
-          `;
-          responseBox.innerText = content;
-          responseBox.style.display = "block";
-          shareButton.style.display = "inline-block";
-        } else {
-          responseBox.innerHTML = `<p style="color: yellow; font-size: 18px; font-weight: bold;">Data Not Found</p>`;
-          responseBox.style.display = "block";
-          shareButton.style.display = "none";
-        }
-      } catch (e) {
-        responseBox.innerHTML = `<p style="color: red; font-size: 18px; font-weight: bold;">Error fetching data. Please try again later.</p>`;
-        responseBox.style.display = "block";
-        shareButton.style.display = "none";
+📶 Operator: ${user.Operator || "Not found"
       }
     }
 
