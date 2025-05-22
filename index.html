@@ -3,149 +3,234 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SIM Data Lookup</title>
+  <title>HANAN X DATABASE</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet"/>
+
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background: #000;
-      font-family: Arial, sans-serif;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      animation: fadeIn 1s ease-in-out;
+      background: linear-gradient(-45deg, #ff6b6b, #f7ff00, #00ff87, #0099ff);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+      color: #fff;
     }
 
-    .box {
-      background: #111;
-      border: 2px solid red;
-      box-shadow: 0 0 25px red;
-      padding: 30px 20px;
-      border-radius: 15px;
-      width: 100%;
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 90%;
       max-width: 400px;
       text-align: center;
-      animation: fadeIn 1s ease-in-out;
+      backdrop-filter: blur(10px);
     }
 
-    .box h2 {
-      color: red;
-      font-size: 24px;
+    h1 {
+      font-size: 28px;
       margin-bottom: 20px;
+      color: #00fff7;
+      text-shadow: 0 0 15px #00fff7;
     }
 
-    .box input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 20px;
-      font-size: 16px;
-      background: #333;
-      color: white;
-      box-shadow: inset 0 0 5px red;
+    .avatar-wrapper {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 8px solid #ff0066;
+      box-shadow: 0 0 30px #ff0066;
+      background: #111;
     }
 
-    .box button {
+    .avatar-wrapper img {
       width: 100%;
-      padding: 12px;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 15px 0;
       border: none;
-      border-radius: 8px;
-      margin: 10px 0;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
       font-size: 16px;
+      outline: none;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px #00fff7;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background: linear-gradient(90deg, #00fff7, #4facfe);
+      border: none;
+      border-radius: 10px;
+      color: #000;
       font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
-      color: white;
-      background: linear-gradient(90deg, #c00000, #ff0000);
-      box-shadow: 0 0 15px red;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 255, 247, 0.4);
     }
 
-    .box button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(90deg, #ff0000, #c00000);
-    }
-
-    .whatsapp-btn {
-      background: linear-gradient(90deg, #25D366, #128C7E);
-      box-shadow: 0 0 15px #25D366;
-      color: white;
+    button:hover {
+      background: linear-gradient(90deg, #4facfe, #00fff7);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 255, 247, 0.6);
     }
 
     .telegram-btn {
-      background: linear-gradient(90deg, #0088cc, #005577);
-      box-shadow: 0 0 15px #0088cc;
-      color: white;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #0088cc, #005f99);
+      color: #fff;
     }
 
-    #responseBox {
-      color: white;
-      margin-top: 20px;
-      font-size: 16px;
-      display: none;
-      animation: fadeIn 1s ease-in-out;
-      background: #222;
-      border: 1px solid #444;
-      padding: 15px;
-      border-radius: 10px;
+    .telegram-btn:hover {
+      background: linear-gradient(90deg, #005f99, #0088cc);
+    }
+
+    .response-box {
+      background: rgba(255, 255, 255, 0.1);
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+      color: #fff;
+      text-align: left;
+      font-size: 14px;
+      box-shadow: inset 0 0 10px rgba(0, 255, 247, 0.2);
+    }
+
+    .formatted-data {
+      margin-top: 10px;
       text-align: left;
     }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+    .formatted-data p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 8px 0;
+    }
+
+    .separator {
+      margin: 10px 0;
+      border-top: 2px solid #ff6600;
+      width: 100%;
+    }
+
+    /* Mobile responsiveness */
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 20px;
+        width: 90%;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="box">
-    <h2>🔍 HananSimData </h2>
-    <input type="text" id="number" placeholder="Enter number Exp 300" required />
-    <button onclick="fetchData()">🔎 Get Details</button>
 
-    <div id="responseBox"></div>
+  <div class="container">
+    <h1>DARK X SIM DATABASE</h1>
 
-    <button id="shareButton" class="whatsapp-btn" onclick="shareWhatsApp()" style="display: none;">📲 Share on WhatsApp</button>
-    <button class="whatsapp-btn" onclick="window.open('https://whatsapp.com/channel/0029Vb59bYqEawe01cZPgz3V', '_blank')">📢 Join WhatsApp Channel</button>
-    <button class="Whatsapp-btn" onclick="window.open('https://wa.me/qr/WIP3MTII3IS7M1', '_blank')">✈️ Contact For Vip Data</button>
-  </div>
+    <!-- Circular Profile Picture Display -->
+    <div class="avatar-wrapper">
+      <img src="https://i.ibb.co/ymJsB6qc/x.jpg" alt="Profile Picture" />
+    </div>
 
-  <script>
-    async function fetchData() {
-      const number = document.getElementById("number").value.trim();
-      const responseBox = document.getElementById("responseBox");
-      const shareButton = document.getElementById("shareButton");
+    <input type="text" id="number" placeholder="ENTER YOU NUMBER" required />
+    <button id="fetchData">Search</button>
 
-      if (!number) {
-        alert("Please enter number Exp 300.");
-        return;
-      }
+    <a href="https://whatsapp.com/channel/0029VbAec5m4SpkMfIyNzk2Y" target="_blank">
+      <button class="telegram-btn">SUPPORT ON WHATSAPP</button>
+    </a>
+    
+    <div id="responseBox" class="r"></div>
+  </div> 
+  
 
-      const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://fam-official.serv00.net/sim/api.php?num=${number}`)}`;
+<script>
+  const fetchButton = document.getElementById("fetchData");
+  const responseBox = document.getElementById("responseBox");
 
-      try {
-        const res = await fetch(url);
-        const json = await res.json();
-        const apiData = JSON.parse(json.contents);
+  fetchButton.addEventListener("click", async () => {
+    const number = document.getElementById("number").value.trim();
+    responseBox.innerHTML = '';
 
-        if (apiData.status === "success" && Array.isArray(apiData.data) && apiData.data.length > 0) {
-          const user = apiData.data[0];
-          const content = `
-📞 Mobile: ${user.Mobile || "Not found"}
-👤 Name: ${user.Name || "Not found"}
-🆔 CNIC: ${user.CNIC || "Not found"}
-🏠 Address: ${user.Address || "Not found"}
-📶 Operator: ${user.Operator || "Not found"
-      }
+    if (!number) {
+      alert("Please enter a valid number.");
+      return;
     }
 
-    function shareWhatsApp() {
-      const responseBox = document.getElementById("responseBox");
-      const text = encodeURIComponent(responseBox.innerText);
-      const url = `https://wa.me/?text=${text}`;
-      window.open(url, '_blank');
+    responseBox.innerHTML = '<p style="text-align:center;">Fetching data...</p>';
+
+    const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://fam-official.serv00.net/sim/api.php?num=${number}`)}`;
+
+    try {
+      const response = await fetch(url);
+      const result = await response.json();
+      const apiData = JSON.parse(result.contents);
+
+      if (apiData.status === "success" && apiData.data.length > 0) {
+        let formattedData = '';
+        
+        apiData.data.forEach(user => {
+          formattedData += `
+            <div class="formatted-data">
+              <p><strong>🔹 Name:</strong> ${user.Name || "N/A"}</p>
+              <p><strong>🔹 Mobile:</strong> ${user.Mobile || "N/A"}</p>
+              <p><strong>🔹 CNIC:</strong> ${user.CNIC || "N/A"}</p>
+              <p><strong>🔹 Operator:</strong> ${user.Operator || "N/A"}</p>
+              <p><strong>🔹 Address:</strong> ${user.Address || "N/A"}</p>
+            </div>
+            <div class="separator"></div>
+          `;
+        });
+
+        responseBox.innerHTML = formattedData;
+      } else {
+        responseBox.innerHTML = `<div class="error">❌ No data found for this number</div>`;
+      }
+    } catch (error) {
+      responseBox.innerHTML = `<div class="error">❌ API Error: ${error.message}</div>`;
     }
-  </script>
+  });
+</script>
+
 </body>
 </html>
